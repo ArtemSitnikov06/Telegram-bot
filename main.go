@@ -4,11 +4,17 @@ import (
 	"TelegramBot/bot"
 	"TelegramBot/handlers"
 	"log"
+	"os"
 )
 import "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 
 func main() {
-	bot1, err := bot.NewBot("7549289800:AAG8za91NbEgucyenDWx01PsF3P1594lWkA")
+
+	token := os.Getenv("TELEGRAM_TOKEN")
+	if token == "" {
+		log.Fatal("❌ Переменная TELEGRAM_TOKEN не задана")
+	}
+	bot1, err := bot.NewBot(token)
 	if err != nil {
 		log.Panic(err)
 	}
